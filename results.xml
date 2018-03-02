@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+	<testsuite>
+		<testcase name="django >=2.0,<2.0.2 resolved (2.0 installed)">
+			<failure message="
+CVE-2018-6188: Information leakage in ``AuthenticationForm``
+============================================================
+
+A regression in Django 1.11.8 made
+:class:`~django.contrib.auth.forms.AuthenticationForm` run its
+``confirm_login_allowed()`` method even if an incorrect password is entered.
+This can leak information about a user, depending on what messages
+``confirm_login_allowed()`` raises. If ``confirm_login_allowed()`` isn't
+overridden, an attacker enter an arbitrary username and see if that user has
+been set to ``is_active=False``. If ``confirm_login_allowed()`` is overridden,
+more sensitive details could be leaked.
+
+This issue is fixed with the caveat that ``AuthenticationForm`` can no longer
+raise the "This account is inactive." error if the authentication backend
+rejects inactive users (the default authentication backend, ``ModelBackend``,
+has done that since Django 1.10). This issue will be revisited for Django 2.1
+as a fix to address the caveat will likely be too invasive for inclusion in
+older versions.
+">
+			</failure>
+		</testcase>
+		<testcase name="aiohttp <0.16.3 resolved (0.9.1 installed)">
+			<failure message="
+aiohttp 0.16.3 fixes a StaticRoute vulnerability to directory traversal attacks.
+">
+			</failure>
+		</testcase>
+		<testcase name="aiocouchdb <0.6.0 resolved (0.5.0 installed)">
+			<failure message="
+aiocouchdb 0.6.0 now correctly set members for database security.">
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
